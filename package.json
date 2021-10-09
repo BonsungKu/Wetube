@@ -7,10 +7,22 @@
     "type": "git",
     "url": "git+https://github.com/BonsungKu/Wetube.git"
   },
+  "scripts": {
+    "dev": "nodemon --exec babel-node index.js"
+  },
   "author": "Ku",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/BonsungKu/Wetube/issues"
   },
-  "homepage": "https://github.com/BonsungKu/Wetube#readme"
+  "homepage": "https://github.com/BonsungKu/Wetube#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.15.8",
+    "@babel/node": "^7.15.8",
+    "@babel/preset-env": "^7.15.8",
+    "nodemon": "^2.0.13"
+  }
 }
