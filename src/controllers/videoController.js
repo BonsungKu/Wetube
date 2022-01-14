@@ -1,12 +1,15 @@
-export const recommended = (req, res) => res.send("Home Page Videos.");
+export const recommended = (req, res) =>
+  res.render("home", { pageTitle: "Home" });
+//send to base.pug #{pageTitle} and render Home.pug
 
 export const see = (req, res) => {
-  return res.send(`Watch Video #${req.params.id}`);
+  res.render("watch");
 };
 
 export const edit = (req, res) => {
-  return res.send("Edit");
+  res.render("edit");
 };
+
 export const search = (req, res) => res.send("search");
 
 export const upload = (req, res) => res.send("Upload Videos");
