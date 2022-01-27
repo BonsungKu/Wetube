@@ -1,4 +1,11 @@
 extends base.pug
 
-block content 
-    h1 Watch video
+block content
+    h3 #{video.views}  #{video.views === 1 ? "view" : "views"}
+    //- 비디오 뷰가 1인 조건이 참이면 view를, 거짓이라면 views를 출력
+    //-inline if문에서 ?는 참인경우~~를 이라는 의미 :는 거짓일 경우
+    a(href=`${video.id}/edit`) Edit Video &rarr;
+    //-absolute url and relative url
+    //-'/'를 붙이게 되면 현재위치에 상관없이 root기준 하위로 이동 = aboslute url
+    //-'/'가 없으면 현재위치에서 하위 경로 페이지로 이동 = realtive url
+    
