@@ -31,19 +31,23 @@ export const recommended = (req, res) => {
 };
 
 export const watch = (req, res) => {
+  //parameter를 호출
   const { id } = req.params;
   const video = videos[id - 1];
   res.render("watch", { pageTitle: `Watching ${video.title}`, video });
+  // render the watch.pug,  make it can use variable called `pageTitle`, and send video variable to use them.
 };
 
-export const edit = (req, res) => {
-  res.render("edit");
+export const getEdit = (req, res) => {
+  const { id } = req.params;
+  const video = videos[id - 1];
+  return res.render("edit", { pageTitle: `Edit ${video.title}`, video });
 };
 
-export const search = (req, res) => res.send("search");
-
-export const upload = (req, res) => res.send("Upload Videos");
-
-export const deleteVideo = (req, res) => {
-  res.send("Delete Videos");
+export const postEdit = (req, res) => {
+  const { id } = req.params;
+  const { title } = req.body;
+  videos[id - 1].title = title;
+  return res.redirect(`/videos/${id}`);
+  // /videos/id값의 url로 리다이렉트
 };
