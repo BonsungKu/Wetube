@@ -12,3 +12,10 @@ const handleError = (error) => console.log("DB Error", error);
 db.on("error", handleError);
 db.once("open", handleOpen);
 //on과 once의 차이는 on은 계속해서 발생시킬수 있음. once는 한번만 발생
+
+/*CRUD
+Create
+Read
+Update
+Delete
+*/
