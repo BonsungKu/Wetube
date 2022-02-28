@@ -3,14 +3,15 @@ import mongoose from "mongoose";
 //creating video model
 //Schema를 사용하여 데이터베이스의 구조와 제약조건을 설정
 const videoSchema = new mongoose.Schema({
-  title: String,
+  title: { type: String, required: true },
   //=={type: String}
-  description: String,
-  createdAt: Date,
+  description: { type: String, required: true },
+  //default값을 설정함으로서 매번 모델작성시에 상세부분까지 입력하지않아도 됨.
+  createdAt: { type: Date, required: true, default: Date.now },
   hashtags: [{ type: String }],
   meta: {
-    views: Number,
-    rating: Number,
+    views: { type: Number, default: 0, required: true },
+    rating: { type: Number, default: 0, required: true },
   },
 });
 
