@@ -1,9 +1,11 @@
 extends base.pug
 
 block content 
-    h4 Change Title of video
+    h4 Update video
     form(method="POST") 
         //-form 에서 작성한 데이터를 백엔드로 보내기위해서는 ()안의 action값을 줘야함.
         //-수정한 비디오를 보내야 하므로 여기서는 POST 사용
         input(name="title", placeholer="Video Title", value=video.title, required)
+        input(name="description", placeholder="Description", type="text", required, minlength=20, value=video.description)
+        input(name="hashtags", placeholder="Hashtags, separated by comma.", type="text", required, value=video.hashtags.join())
         input(value="Save", type="submit")

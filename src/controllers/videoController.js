@@ -17,25 +17,41 @@ export const home = async (req, res) => {
   //send to base.pug #{pageTitle} and render Home.pug
 };
 
-export const watch = (req, res) => {
+export const watch = async (req, res) => {
   //parameter를 호출
   const { id } = req.params;
-  res.render("watch");
-  // render the watch.pug,  make it can use variable called `pageTitle`, and send video variable to use them.
+  const video = await Video.findById(id);
+  if (!video) {
+    return res.render("404", { pageTitle: "Video not found." });
+  }
+  return res.render("watch", { pageTitle: video.title, video });
+  // render the watch.pug,  use variable called `pageTitle` from base.pug, and send video variable to use them.
 };
 
-export const getEdit = (req, res) => {
+export const getEdit = async (req, res) => {
   const { id } = req.params;
-
-  return res.render("edit");
+  const video = await Video.findById(id);
+  if (!video) {
+    return res.render("404", { pageTitle: "Video not found." });
+  }
+  return res.render("edit", { pageTitle: `Edit ${video.title}`, video });
 };
 
-export const postEdit = (req, res) => {
+export const postEdit = async (req, res) => {
   const { id } = req.params;
-  const { title } = req.body;
-  //javascript representation of value of <form>
-  return res.redirect(`/videos/${id}`);
+  const { title, description, hashtags } = req.body;
+  const video = await Video.findById(id);
+  if (!video) {
+    return res.render("404", { pageTitle: "Video not found." });
+  }
+  video.title = title;
+  video.description = description;
+  video.hashtags = hashtags
+    .split(",")
+    .map((word) => (word.startsWith("#") ? word : `#${word}`));
+  await video.save();
   // /videos/id값의 url로 리다이렉트
+  return res.redirect(`/videos/${id}`);
 };
 
 export const getUpload = (req, res) => {
